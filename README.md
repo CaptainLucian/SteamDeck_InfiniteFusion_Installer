@@ -1,2 +1,27 @@
 # Non-Steam-Shortcut-Adder
-A learning project to try and programattically add entries to Steam for applications. 
+Summary:
+A learning project to try and programattically add entries to Steam for applications. In short, if you want to install a game or application that utilizes an installer on a Linux system via Proton you'd need to add the installer manually, set the Proton version manually, run the installer, find the compatdata folder, and then update the existing shortcut to use the new path and exe. If the game or application ALSO has a seperate exe to run updates you need to update the shortcut to point to the updater, run it, and then change it back, which is cumbersome.
+
+Statement of Problem:
+Adding non-Steam games with installers is more complicated than non-technical Steam Deck users would want to engage in.
+
+Limitations of Methodology:
+Because my end goal is specifcally to have a game or application's shortcut to be directly added to Steam, I need to know exactly what and where that final .exe is. This means it would need to be implemented per game/application.
+
+Method:
+As this is a learning project, I'm not coming in with the knowledge of how to do this. To be able to effectively start chipping away at this, I will utliize the open-source information from https://github.com/moraroy/NonSteamLaunchers-On-Steam-Deck as a reference, as it largely does what I want to do but specifically for a handful of launchers.
+
+Goals (in priority order):
+1. Add a non-Steam game as a shortcut programatically
+2. Have the above shortcut be linked to the compatdata folder, finding the right appID itself
+3. Set the Proton version automatically (probably to Experimental)
+4. If appropriate, make the script download the application itself
+5. Make the script able to complete the installation process of the application itself
+
+First Target:
+As I need to pick a specific application to start with that I'm familiar with, I pick Pokemon Infinite Fusion (https://github.com/infinitefusion/infinitefusion-e18). The reasoning being that it easily offers a place for the script to expand, as it is a game that requires a seperate process be run to update it. The update script itself is quite simple, so if I'm able to point to the folder directly by scraping the compatdata folder I can eliminate the need to swapping around the paths the shortcut needs to use, as it's just a set of git commands so Proton isn't needed, and the additional steps set in the script to use mintgit aren't needed as this script will be SteamOS focused. 
+
+The git commands the updater needs to do is
+git remote add origin "https://github.com/infinitefusion/infinitefusion-e18.git"
+git fetch origin releases
+git reset --hard origin/releases

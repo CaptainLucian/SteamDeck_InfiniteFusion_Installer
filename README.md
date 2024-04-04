@@ -1,6 +1,6 @@
 # Non-Steam-Shortcut-Adder
 Summary:
-A learning project to try and programattically add entries to Steam for applications. In short, if you want to install a game or application that utilizes an installer on a Linux system via Proton you'd need to add the installer manually, set the Proton version manually, run the installer, find the compatdata folder, and then update the existing shortcut to use the new path and exe. If the game or application ALSO has a seperate exe to run updates you need to update the shortcut to point to the updater, run it, and then change it back, which is cumbersome.
+A learning project to try and programmatically add entries to Steam for applications. In short, if you want to install a game or application that utilizes an installer on a Linux system via Proton you'd need to add the installer manually, set the Proton version manually, run the installer, find the compatdata folder, and then update the existing shortcut to use the new path and exe. If the game or application ALSO has a seperate exe to run updates you need to update the shortcut to point to the updater, run it, and then change it back, which is cumbersome.
 
 Statement of Problem:
 Adding non-Steam games with installers is more complicated than non-technical Steam Deck users would want to engage in.

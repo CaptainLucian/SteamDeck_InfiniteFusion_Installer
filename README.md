@@ -25,3 +25,5 @@ The git commands the updater needs to do is
 git remote add origin "https://github.com/infinitefusion/infinitefusion-e18.git"
 git fetch origin releases
 git reset --hard origin/releases
+
+Bonus points if I can make the script then launch the game via Steam so you'd be able to strictly use the update script always.

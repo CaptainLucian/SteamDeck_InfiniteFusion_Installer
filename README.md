@@ -27,3 +27,20 @@ As I need to pick a specific application to start with that I'm familiar with, I
 
 Bonus points if I can make the script then launch the game via Steam so you'd be able to strictly use the update script always.
   Update- I'd need this to be a second script OR be smarter and make it check for an existing entry in the VDF
+
+
+#How To Use
+This installer is meant for SteamDeck installs, if you are looking to install it via Windows use the official methods outlined on r/PokemonInfiniteFusion. There is no promise of support, this is just a learning project.
+
+As of v0.2, this is the process.
+1) Download v0.2
+2) Extract InfiniteFusion.sh and SteamShortcutMaker.py into your Downloads folder (yes, right now it really has to be the Downloads folder)
+3) Right-click on InfiniteFusion.sh and select "Run in Konsole"
+4) Once the window says "If no errors occued, the shortcut has been added to Steam.Steam may need to be restarted to take effect" the script has finished.
+5) If the script was successful, close Steam entirely (right-click on it in the taskbar and hit close)
+6) Re-open Steam
+7) Pokemon Infinite Fusion should now be in your game list
+8) Right-click on Pokemon Infinite Fusion and select "Properties"
+9) Go to the Compatibility tab and force the use of a specific tool
+10) Set it to Proton GE or Experimental
+11) Run the game! If you've not played it before be sure to check the options to set things like "how to input text" (you probably want cursor mode on the Deck)

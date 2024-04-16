@@ -1,4 +1,7 @@
-# Non-Steam-Shortcut-Adder
+# SteamDeck_InfiniteFusion_Installer 
+
+Not officially affiliated or approved by the Pokemon Infinite Fusion team, though the files should be genuine. I got the github link I use in the installer FROM the official lightweight installer/updater.bat script.
+
 Summary:
 A learning project to try and programmatically add entries to Steam for applications. In short, if you want to install a game or application that utilizes an installer on a Linux system via Proton you'd need to add the installer manually, set the Proton version manually, run the installer, find the compatdata folder, and then update the existing shortcut to use the new path and exe. If the game or application ALSO has a seperate exe to run updates you need to update the shortcut to point to the updater, run it, and then change it back, which is cumbersome.
 

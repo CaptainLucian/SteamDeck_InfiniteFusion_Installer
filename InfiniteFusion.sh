@@ -6,43 +6,26 @@ set -o pipefail     # capture error from pipes
 # $USER
 [[ -n $(logname >/dev/null 2>&1) ]] && logged_in_user=$(logname) || logged_in_user=$(whoami)
 
-echo "Downloading/Updating Pokemon Infinite Fusion at home/user/Games/Testing Ground"
-if [ -d ~/Games/"Testing Ground" ]
+echo "Downloading/Updating Pokemon Infinite Fusion at home/user/Games/PokemonInfiniteFusion"
+if [ -d ~/Games/"PokemonInfiniteFusion" ]
 then
     echo "Folder exists, moving on"
 else
-    mkdir -p ~/Games/"Testing Ground"
+    mkdir -p ~/Games/"PokemonInfiniteFusion"
 fi
-cd ~/Games/"Testing Ground"
-#if [ -f ~/Games/"Testing Ground"/6.1.3.zip ]
-#then
-#    echo "6.1.3.zip already found, moving to install"
-#else
-#    echo "Downloading"
-#    wget "https://github.com/infinitefusion/infinitefusion-e18/archive/refs/tags/6.1.3.zip"
-#   sleep 120
-#    echo "wakey wakey, sleep is done"
-#fi
-#if [ -f ~/Games/"Testing Ground"/Game.exe ]
-#then
-#    echo "Files found, moving on to updates.."
-#else
-#    unzip \*.zip
-#fi
-#echo "Checking for Updates...."
+cd ~/Games/"PokemonInfiniteFusion"
+echo "Thanks to Hungry Pickle for making the offical Pokemon Infinite Fusion updater .bat script I used here"
 git init .
 git remote add origin "https://github.com/infinitefusion/infinitefusion-e18.git"
 git fetch origin releases
 git reset --hard origin/releases
-echo "Install complete, adding to Steam.."
+echo "Install complete, adding to Steam.. Thank you NonSteamLaunchers team for making something to reference"
 
 #Buckle up,things are getting a lot more technical and a lot more copy/paste from here on in.
+###Massive NonSteamLaunchers copy start
 
-
-
-#logged_in_home="~" # I think you can get away without pulling actively logged in user but this variable is used so much I just want to leave it for now
-#Well it disagrees, let me try assuming basic ass user
-logged_in_home="/home/deck"
+logged_in_home=$(eval echo "~${logged_in_user}")
+#logged_in_home="/home/deck"
 # Set the default Steam directory
 steam_dir="${logged_in_home}/.local/share/Steam"
 echo $steam_dir
@@ -172,7 +155,6 @@ else
     echo "Current user's userdata folder not found"
 fi
 
-
 # Pre check for updating the config file
 
 # Set the default Steam directory
@@ -194,10 +176,14 @@ else
 fi
 echo "export logged_in_home=$logged_in_home" >> ${logged_in_home}/.config/systemd/user/env_vars
 echo "export steamid3=$steamid3" >> ${logged_in_home}/.config/systemd/user/env_vars
+### Massive NonSteamLaunchers copy end
 
 echo "installing python script dependency"
 python3 -m pip install vdf
-echo "starting python script"
-python3 ${logged_in_home}/Downloads/'Steam Shortcut Maker.py'
 
-echo "Shortcut has been added to Steam, it may need to be restarted to take effect"
+#curl "home/deck/Desktop/SteamShortcutMaker.py" "https://github.com/CaptainLucian/SteamDeck_InfiniteFusion_Installer/blob/main/SteamShortcutMaker.py"
+
+echo "starting python script"
+python3 ${logged_in_home}/Downloads/SteamShortcutMaker.py
+
+echo "If no errors occued, the shortcut has been added to Steam.Steam may need to be restarted to take effect"

@@ -29,7 +29,7 @@ Bonus points if I can make the script then launch the game via Steam so you'd be
   Update- I'd need this to be a second script OR be smarter and make it check for an existing entry in the VDF
 
 
-#How To Use
+# How To Use
 This installer is meant for SteamDeck installs, if you are looking to install it via Windows use the official methods outlined on r/PokemonInfiniteFusion. There is no promise of support, this is just a learning project.
 
 As of v0.2, this is the process.

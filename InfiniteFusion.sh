@@ -6,14 +6,20 @@ set -o pipefail     # capture error from pipes
 # $USER
 [[ -n $(logname >/dev/null 2>&1) ]] && logged_in_user=$(logname) || logged_in_user=$(whoami)
 
-echo "Downloading/Updating Pokemon Infinite Fusion at home/user/Games/PokemonInfiniteFusion"
-if [ -d ~/Games/"PokemonInfiniteFusion" ]
+logged_in_home=$(eval echo "~${logged_in_user}")
+# Set the default Steam directory
+steam_dir="${logged_in_home}/.local/share/Steam"
+# We are going to need to know where this file is to call it later so I'm making a copy with an absolute path so we can use it after changing directories.
+cp SteamShortcutMaker.py ${logged_in_home}/Desktop
+
+echo "Downloading/Updating Pokemon Infinite Fusion at ${logged_in_home}/Games/PokemonInfiniteFusion"
+if [ -d ${logged_in_home}/Games/"PokemonInfiniteFusion" ]
 then
     echo "Folder exists, moving on"
 else
-    mkdir -p ~/Games/"PokemonInfiniteFusion"
+    mkdir -p ${logged_in_home}/Games/"PokemonInfiniteFusion"
 fi
-cd ~/Games/"PokemonInfiniteFusion"
+cd ${logged_in_home}/Games/"PokemonInfiniteFusion"
 echo "Thanks to Hungry Pickle for making the offical Pokemon Infinite Fusion updater .bat script I used here"
 git init .
 git remote add origin "https://github.com/infinitefusion/infinitefusion-e18.git"
@@ -21,14 +27,7 @@ git fetch origin releases
 git reset --hard origin/releases
 echo "Install complete, adding to Steam.. Thank you NonSteamLaunchers team for making something to reference"
 
-#Buckle up,things are getting a lot more technical and a lot more copy/paste from here on in.
 ###Massive NonSteamLaunchers copy start
-
-logged_in_home=$(eval echo "~${logged_in_user}")
-#logged_in_home="/home/deck"
-# Set the default Steam directory
-steam_dir="${logged_in_home}/.local/share/Steam"
-echo $steam_dir
 
 # Check if the loginusers.vdf file exists
 if [[ -f "${logged_in_home}/.steam/root/config/loginusers.vdf" ]]; then
@@ -184,6 +183,8 @@ python3 -m pip install vdf
 #curl "home/deck/Desktop/SteamShortcutMaker.py" "https://github.com/CaptainLucian/SteamDeck_InfiniteFusion_Installer/blob/main/SteamShortcutMaker.py"
 
 echo "starting python script"
-python3 ${logged_in_home}/Downloads/SteamShortcutMaker.py
+python3 ${logged_in_home}/Desktop/SteamShortcutMaker.py
 
-echo "If no errors occued, the shortcut has been added to Steam.Steam may need to be restarted to take effect"
+rm ${logged_in_home}/Desktop/SteamShortcutMaker.py
+
+echo "If no errors occured, the shortcut has been added to Steam.Steam may need to be restarted to take effect"

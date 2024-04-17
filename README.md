@@ -5,7 +5,7 @@ Not officially affiliated or approved by the Pokemon Infinite Fusion team, thoug
 Summary:
 A learning project to try and programmatically add entries to Steam for applications. In short, if you want to install a game or application that utilizes an installer on a Linux system via Proton you'd need to add the installer manually, set the Proton version manually, run the installer, find the compatdata folder, and then update the existing shortcut to use the new path and exe. If the game or application ALSO has a seperate exe to run updates you need to update the shortcut to point to the updater, run it, and then change it back, which is cumbersome.
 
-EDIT: Due to the nature of how Pokemon Infinite Fusion is deployed, this, makes all of the compatdata pieces unnecessary.
+EDIT: Due to the nature of how Pokemon Infinite Fusion is deployed, all of the compatdata pieces unnecessary.
 
 Statement of Problem:
 Adding non-Steam games with installers can be more complicated than non-technical Steam Deck users would want to engage in, and clunky even for more technical users.

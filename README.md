@@ -24,7 +24,7 @@ Addendum: This isn't as immediately expandable as I'd hoped, as there isn't a co
 # How To Use
 This installer is meant for SteamDeck installs, if you are looking to install it via Windows use the official methods outlined on r/PokemonInfiniteFusion. There is no promise of support, this is just a learning project.
 
-As of v1.0, this is the process.
+As of v1.0, this is the install process.
 1) Download v1.0
 2) Extract InfiniteFusion.sh and SteamShortcutMaker.py (they must be in the same folder as each other)
 3) Right-click on InfiniteFusion.sh and select "Run in Konsole"
@@ -36,3 +36,5 @@ As of v1.0, this is the process.
 9) Go to the Compatibility tab and force the use of a specific tool
 10) Set it to Proton GE or Experimental
 11) Run the game! If you've not played it before be sure to check the options to set "text entry" to "cursor" so you don't need to pull up the keyboard to enter names.
+
+To update the game, right-click on InfiniteFusionUpdater.sh and select "Run In Konsole". This file can be anywhere and assumes your game path is /{logged in user}/home/Games/PokemonInfiniteFusion (the install path for the install script).

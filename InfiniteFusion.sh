@@ -1,4 +1,7 @@
 #!/bin/bash
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+BLUE='\033[0;34m'
 #set -x              # activate debugging (execution shown)
 set -o pipefail     # capture error from pipes
 
@@ -9,23 +12,27 @@ set -o pipefail     # capture error from pipes
 logged_in_home=$(eval echo "~${logged_in_user}")
 # Set the default Steam directory
 steam_dir="${logged_in_home}/.local/share/Steam"
+# Game Variables
+# Made to make reusing the structure easier
+Game="Pokemon Infinite Fusion"
+GamePath="${logged_in_home}/Games/PokemonInfiniteFusion"
 # We are going to need to know where this file is to call it later so I'm making a copy with an absolute path so we can use it after changing directories.
 cp SteamShortcutMaker.py ${logged_in_home}/Desktop
 
-echo "Downloading/Updating Pokemon Infinite Fusion at ${logged_in_home}/Games/PokemonInfiniteFusion"
-if [ -d ${logged_in_home}/Games/"PokemonInfiniteFusion" ]
+echo -e "${BLUE}Installing ${Game} at:${NC} ${GamePath}/"
+if [ -d ${GamePath} ]
 then
-    echo "Folder exists, moving on"
+    echo -e "Folder already exists, continuing...."
 else
     mkdir -p ${logged_in_home}/Games/"PokemonInfiniteFusion"
 fi
-cd ${logged_in_home}/Games/"PokemonInfiniteFusion"
-echo "Thanks to Hungry Pickle for making the offical Pokemon Infinite Fusion updater .bat script I used here"
+cd ${GamePath}
+echo -e "${BLUE}Thanks to Hungry Pickle for making the offical Pokemon Infinite Fusion updater .bat script I used here${NC}"
 git init .
 git remote add origin "https://github.com/infinitefusion/infinitefusion-e18.git"
 git fetch origin releases
 git reset --hard origin/releases
-echo "Install complete, adding to Steam.. Thank you NonSteamLaunchers team for making something to reference"
+echo -e "${BLUE}Install complete, adding to Steam..${NC} Thank you NonSteamLaunchers team for making something to reference"
 
 ###Massive NonSteamLaunchers copy start
 
@@ -67,7 +74,7 @@ if [[ -f "${logged_in_home}/.steam/root/config/loginusers.vdf" ]]; then
     # Print the currently logged in user
     if [[ -n $current_user ]]; then
         echo "Currently logged in user: $current_user"
-        echo "SteamID: $current_steamid"
+#        echo "SteamID: $current_steamid"
     else
         echo "No users found."
     fi
@@ -90,7 +97,7 @@ fi
 # Check if userdata folder was found
 if [[ -n "$userdata_folder" ]]; then
     # Userdata folder was found
-    echo "Current user's userdata folder found at: $userdata_folder"
+ #   echo "Current user's userdata folder found at: $userdata_folder"
 
     # Find shortcuts.vdf file for current user
     shortcuts_vdf_path=$(find "$userdata_folder" -type f -name shortcuts.vdf)
@@ -118,12 +125,12 @@ if [[ -n "$userdata_folder" ]]; then
     fi
 else
     # Userdata folder was not found
-    echo "Current user's userdata folder not found"
+    echo -e "${RED}Current user's userdata folder not found${NC}"
 fi
 # Check if userdata folder was found
 if [[ -n "$userdata_folder" ]]; then
     # Userdata folder was found
-    echo "Current user's userdata folder found at: $userdata_folder"
+#    echo "Current user's userdata folder found at: $userdata_folder"
 
     # Find shortcuts.vdf file for current user
     shortcuts_vdf_path=$(find "$userdata_folder" -type f -name shortcuts.vdf)
@@ -151,7 +158,7 @@ if [[ -n "$userdata_folder" ]]; then
     fi
 else
     # Userdata folder was not found
-    echo "Current user's userdata folder not found"
+    echo -e "${RED}Current user's userdata folder not found${NC}"
 fi
 
 # Pre check for updating the config file
@@ -171,7 +178,7 @@ if [ -f "$config_vdf_path" ]; then
     # Set the name of the compatibility tool to use
     compat_tool_name=$(ls "${logged_in_home}/.steam/root/compatibilitytools.d" | grep "GE-Proton" | sort -V | tail -n1)
 else
-    echo "Could not find config.vdf file"
+    echo -e "${RED}Could not find config.vdf file${NC}"
 fi
 echo "export logged_in_home=$logged_in_home" >> ${logged_in_home}/.config/systemd/user/env_vars
 echo "export steamid3=$steamid3" >> ${logged_in_home}/.config/systemd/user/env_vars
@@ -187,4 +194,4 @@ python3 ${logged_in_home}/Desktop/SteamShortcutMaker.py
 
 rm ${logged_in_home}/Desktop/SteamShortcutMaker.py
 
-echo "If no errors occured, the shortcut has been added to Steam.Steam may need to be restarted to take effect"
+echo -e "${BLUE}If no errors occured, the shortcut has been added to Steam. Steam may need to be restarted to take effect${NC}"

@@ -1,23 +1,29 @@
 #!/bin/bash
 #set -x              # activate debugging (execution shown)
 set -o pipefail     # capture error from pipes
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+BLUE='\033[0;34m'
 
 # ENVIRONMENT VARIABLES
 # $USER
 [[ -n $(logname >/dev/null 2>&1) ]] && logged_in_user=$(logname) || logged_in_user=$(whoami)
+logged_in_home=$(eval echo "~${logged_in_user}")
+Game="Pokemon Infinite Fusion"
+GamePath="${logged_in_home}/Games/PokemonInfiniteFusion"
 
-echo "Downloading/Updating Pokemon Infinite Fusion at home/user/Games/PokemonInfiniteFusion"
-if [ -d ~/Games/"PokemonInfiniteFusion" ]
+echo -e "${BLUE}Updating ${Game} at:${NC} ${GamePath}/"
+if [ -d ${GamePath} ]
 then
-    echo "Folder exists, moving on"
+    echo "Folder exists, continuing..."
 else
-    echo "Existing PokemonInfiniteFusion Install not found in the expected lcoation, please run InfiniteFusion.sh first"
-    end
+    echo "${RED}Existing PokemonInfiniteFusion Install not found in the expected lcoation, please run InfiniteFusion.sh first${NC}"
+    exit
 fi
-cd ~/Games/"PokemonInfiniteFusion"
-echo "Thanks to Hungry Pickle for making the offical Pokemon Infinite Fusion updater .bat script I used here"
+cd ${GamePath}
+echo -e "${BLUE}Thanks to Hungry Pickle for making the offical Pokemon Infinite Fusion updater .bat script I used here${NC}"
 git init .
 git remote add origin "https://github.com/infinitefusion/infinitefusion-e18.git"
 git fetch origin releases
 git reset --hard origin/releases
-echo "Update complete"
+echo -e "${BLUE}Update complete!"

@@ -26,7 +26,6 @@ for line in lines:
 logged_in_home = os.environ['logged_in_home']
 steamid3 = os.environ['steamid3']
 filepath = logged_in_home +'/.steam/steam/userdata/'+steamid3+'/config/shortcuts.vdf'
-print (filepath)
 #Binary Read in of the contents and stored as the variable "shortcuts"
 with open(filepath,'rb') as file:
     shortcuts = vdf.binary_loads(file.read())
@@ -34,8 +33,8 @@ with open(filepath,'rb') as file:
 #To easily inject the entry I'm adding it to a variable
 #A great place to improve this would be making the AppID auto generate to a unique value but that was quickly getting over my head
 #Another place to improve would be pulling in the home location variables for this to work for non-default users    
-startdir = '"'+logged_in_home+'/Games/InfiniteFusion/'+'"'
-exe = '"'+logged_in_home+'/Games/InfiniteFusion/Game.exe'+'"'
+startdir = '"'+logged_in_home+'/Games/PokemonInfiniteFusion/'+'"'
+exe = '"'+logged_in_home+'/Games/PokemonInfiniteFusion/Game.exe'+'"'
 PIF = {
     'appid': "-207231401",
     'appname': "Pokemon Infinite Fusion",

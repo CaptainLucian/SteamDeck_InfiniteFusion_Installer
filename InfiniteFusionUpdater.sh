@@ -12,9 +12,23 @@ logged_in_home=$(eval echo "~${logged_in_user}")
 Game="Pokemon Infinite Fusion"
 #Old static install path method
 #GamePath="${logged_in_home}/Games/PokemonInfiniteFusion"
-echo "Please provide the complete path for the existing installation. Files will be dropped into the selected folder directly"
-sleep 5
-GamePath=$(zenity --file-selection --directory)
+#Set current location as a variable
+installer_dir=$(echo $PWD)
+if [ -f "${installer_dir}/path.txt" ]
+then
+    echo -e "Install Path Found at gamepath"
+    GamePath=$(cat ${installer_dir}/path.txt)
+else
+    echo -e "No existing path file found, please select the installed folder"
+    sleep 5
+    GamePath=$(zenity --file-selection --directory)
+    echo "$GamePath" >> "$installer_dir"/path.txt
+fi
+#
+#echo "$GamePath" >> ${logged_in_home}/Desktop/path.txt
+#echo "Please provide the complete path for the existing installation. Files will be dropped into the selected folder directly"
+#sleep 5
+#GamePath=$(zenity --file-selection --directory)
 
 #Check from static install method
 echo -e "${BLUE}Updating ${Game} at:${NC} ${GamePath}/"

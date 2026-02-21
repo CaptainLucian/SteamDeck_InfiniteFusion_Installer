@@ -12,17 +12,21 @@ set -o pipefail     # capture error from pipes
 logged_in_home=$(eval echo "~${logged_in_user}")
 # Set the default Steam directory
 steam_dir="${logged_in_home}/.local/share/Steam"
+# Set installer location
+installer_dir=$(echo $PWD)
 # Game Variables
 # Made to make reusing the structure easier
 Game="Pokemon Infinite Fusion"
+#old hardcoded path
 #GamePath="/mnt/Old SSD/PokemonInfiniteFusion"
 echo "Please provide the complete path for installation. Files will be dropped into the selected folder directly"
 sleep 5
 GamePath=$(zenity --file-selection --directory)
 # Replacing the old hardcoded path with a GUI for selection
-#echo "export gamepath=$GamePath" >> ${logged_in_home}/.config/systemd/user/env_vars
+echo "$GamePath" >> "$installer_dir"/path.txt
 
-cp SteamShortcutMaker.py ${logged_in_home}/Desktop
+#Old method required copying to desktop
+#cp SteamShortcutMaker.py ${logged_in_home}/Desktop
 
 echo -e "${BLUE}Installing ${Game} at:${NC} ${GamePath}/"
 #if [ -d "${GamePath}" ]
@@ -199,8 +203,8 @@ python3 -m pip install vdf
 #curl "home/deck/Desktop/SteamShortcutMaker.py" "https://github.com/CaptainLucian/SteamDeck_InfiniteFusion_Installer/blob/main/SteamShortcutMaker.py"
 
 echo "starting python script"
-python3 ${logged_in_home}/Desktop/SteamShortcutMaker.py
+python3 "$installer_dir"/SteamShortcutMaker.py
 
-rm ${logged_in_home}/Desktop/SteamShortcutMaker.py
+#rm ${logged_in_home}/Desktop/SteamShortcutMaker.py
 
 echo -e "${BLUE}If no errors occured, the shortcut has been added to Steam. Steam may need to be restarted to take effect${NC}"

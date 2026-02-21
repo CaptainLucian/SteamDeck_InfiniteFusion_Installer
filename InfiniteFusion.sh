@@ -15,18 +15,25 @@ steam_dir="${logged_in_home}/.local/share/Steam"
 # Game Variables
 # Made to make reusing the structure easier
 Game="Pokemon Infinite Fusion"
-GamePath="${logged_in_home}/Games/PokemonInfiniteFusion"
-# We are going to need to know where this file is to call it later so I'm making a copy with an absolute path so we can use it after changing directories.
+#GamePath="/mnt/Old SSD/PokemonInfiniteFusion"
+echo "Please provide the complete path for installation. Files will be dropped into the selected folder directly"
+sleep 5
+GamePath=$(zenity --file-selection --directory)
+# Replacing the old hardcoded path with a GUI for selection
+#echo "export gamepath=$GamePath" >> ${logged_in_home}/.config/systemd/user/env_vars
+
 cp SteamShortcutMaker.py ${logged_in_home}/Desktop
 
 echo -e "${BLUE}Installing ${Game} at:${NC} ${GamePath}/"
-if [ -d ${GamePath} ]
-then
-    echo -e "Folder already exists, continuing...."
-else
-    mkdir -p ${logged_in_home}/Games/"PokemonInfiniteFusion"
-fi
-cd ${GamePath}
+#if [ -d "${GamePath}" ]
+#then
+#    echo -e "Folder already exists, continuing...."
+#else
+#    mkdir -p $/mnt/Old SSD/"PokemonInfiniteFusion"
+#fi
+#
+#echo "$GamePath" >> ${logged_in_home}/Desktop/path.txt
+cd "${GamePath}"
 echo -e "${BLUE}Thanks to Hungry Pickle for making the offical Pokemon Infinite Fusion updater .bat script I used here${NC}"
 git init .
 git remote add origin "https://github.com/infinitefusion/infinitefusion-e18.git"
@@ -176,12 +183,14 @@ if [ -f "$config_vdf_path" ]; then
     cp "$config_vdf_path" "$backup_path"
 
     # Set the name of the compatibility tool to use
-    compat_tool_name=$(ls "${logged_in_home}/.steam/root/compatibilitytools.d" | grep "GE-Proton" | sort -V | tail -n1)
+    compat_tool_name=$(ls "${logged_in_home}/.steam/root/compatibilitytools.d" | grep "Experimental" | sort -V | tail -n1)
 else
     echo -e "${RED}Could not find config.vdf file${NC}"
 fi
 echo "export logged_in_home=$logged_in_home" >> ${logged_in_home}/.config/systemd/user/env_vars
 echo "export steamid3=$steamid3" >> ${logged_in_home}/.config/systemd/user/env_vars
+#adding in GamePath here
+echo "export gamepath=$GamePath" >> ${logged_in_home}/.config/systemd/user/env_vars
 ### Massive NonSteamLaunchers copy end
 
 echo "installing python script dependency"

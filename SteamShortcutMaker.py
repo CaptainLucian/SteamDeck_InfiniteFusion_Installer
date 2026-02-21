@@ -1,5 +1,6 @@
 #We need to import the library made to work with Valve's vdf format
 import vdf
+from sys import exit
 #importing libraries need to pull in variables
 import os, re
 
@@ -25,6 +26,7 @@ for line in lines:
 # Variables from NonSteamLaunchers.sh
 logged_in_home = os.environ['logged_in_home']
 steamid3 = os.environ['steamid3']
+gamepath = os.environ['gamepath']
 filepath = logged_in_home +'/.steam/steam/userdata/'+steamid3+'/config/shortcuts.vdf'
 #Binary Read in of the contents and stored as the variable "shortcuts"
 with open(filepath,'rb') as file:
@@ -33,8 +35,8 @@ with open(filepath,'rb') as file:
 #To easily inject the entry I'm adding it to a variable
 #A great place to improve this would be making the AppID auto generate to a unique value but that was quickly getting over my head
 #Another place to improve would be pulling in the home location variables for this to work for non-default users    
-startdir = '"'+logged_in_home+'/Games/PokemonInfiniteFusion/'+'"'
-exe = '"'+logged_in_home+'/Games/PokemonInfiniteFusion/Game.exe'+'"'
+startdir = '"'+gamepath+'"'
+exe = '"'+gamepath+'/Game.exe'+'"'
 PIF = {
     'appid': "-207231401",
     'appname': "Pokemon Infinite Fusion",
